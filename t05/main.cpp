@@ -3,27 +3,30 @@
 
 int main (int argc, char* argv[]) {
 
-    if (argc != 5)
+    if (argc != 5) {
         std::cerr << "usage:./automaton [name] [level] [health] [stamin]\n";
+        exit(1);
+    }
     else {    
-        auto num = 2;
+        auto i = 0;
 
         try {
-            std::string::size_type sz;
-            auto level = std::stoi(argv[2], &sz);
-            num++;
-            auto health = std::stof(argv[3], &sz);
-            num++;
-            auto stamina = std::stod(argv[4], &sz);
+            size_t ind;
+            auto name = argv[++i];
+            auto level = std::stoi(argv[++i], &ind);
+            ind != strlen(argv[i]) ? throw "..." : 0;
+            auto health = std::stof(argv[++i], &ind);
+            ind != strlen(argv[i]) ? throw "..." : 0;
+            auto stamina = std::stod(argv[++i], &ind);
+            ind != strlen(argv[i]) ? throw "..." : 0;
 
-            std::cout << "Name = " << argv[1] << std::endl;
+            std::cout << "Name = " << name << std::endl;
             std::cout << "Level = " << level << std::endl;
             std::cout << "Health = " << health << std::endl;
             std::cout << "Stamina = " << stamina << std::endl;
-
-        }
-        catch (const std::invalid_argument& e) {
-            std::cerr << "Invalid argument: " << argv[num] << std::endl;
+        } catch (...) {
+            std::cerr << "Invalid argument: " << argv[i] << std::endl;
+            exit(1);
         }
     }
 
